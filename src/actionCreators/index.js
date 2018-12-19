@@ -35,7 +35,6 @@ const axi = axios.create({
 //   } catch (err) {
 //     console.log('No JWT for authenticaiton.');
 //   }
-
 //   return `Bearer ${token}`;
 // };
 

@@ -20,6 +20,12 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false
+    },
+    "ios": {
+      "bundleIdentifier": "me.autom8.pathfinder.SecureImage"
+    },
+    "android": {
+      "package": "me.autom8.pathfinder.SecureImage"
     }
   }
 }

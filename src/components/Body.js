@@ -1,6 +1,7 @@
 import React from 'react';
-import { Alert, Button, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { test } from '../actionCreators';
+import Settings from './Settings';
 
 export default class Body extends React.Component {
   onPressLearnMore = () => {
@@ -11,19 +12,33 @@ export default class Body extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          onPress={this.onPressLearnMore}
-          title="Learn More"
-          color="#ffff"
-          backgroundColor="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
+        <Settings visibility={true} />
+        <TouchableOpacity style={styles.b} onPress={this.onPressLearnMore} underlayColor="#fff">
+          <Text style={styles.t}>Update</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  t: {
+    color: '#fff',
+    textAlign: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  b: {
+    marginRight: 40,
+    marginLeft: 40,
+    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#9932CC',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+  },
   container: {
     flex: 2,
     marginTop: 0,
