@@ -1,35 +1,46 @@
+import { AntDesign } from '@expo/vector-icons';
+import { create, Store } from 'microstates';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Modal, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 export default class Settings extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { modalVisible: this.props.visibility };
-  }
+  updateVisibility = modalVisible => this.setState({ modalVisible });
 
-  setModalVisibility = visible => this.setState({ modalVisible: visible });
+  state = {
+    modalVisible: Store(create(Boolean, this.props.visibility), this.updateVisibility),
+  };
 
   render() {
+    const { modalVisible } = this.state;
+
     return (
-      <View style={{ backgroundColor: 'yellow' }}>
+      <View>
         <Modal
           animationType="fade"
           transparent={true}
-          visible={this.state.modalVisible}
+          visible={modalVisible.state}
           // onRequestClose={() => {
           //   Alert.alert('Modal has been closed.');
           // }}
         >
-          <View style={styles.blarb}>
-            <View style={styles.narb}>
-              <Text>Settings</Text>
-
+          <View style={styles.container}>
+            <View style={styles.content}>
+              <View style={styles.spacer} />
+              <View style={styles.spacer}>
+                <Text style={styles.text}>Settings</Text>
+              </View>
               <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisibility(!this.state.modalVisible);
-                }}
+                onPress={() => modalVisible.toggle()}
+                style={styles.spacer}
+                underlayColor="white"
               >
-                <Text>X</Text>
+                <AntDesign
+                  name="closecircleo"
+                  size={24}
+                  color="black"
+                  style={{ marginLeft: 'auto', marginRight: 15 }}
+                />
               </TouchableHighlight>
             </View>
           </View>
@@ -39,34 +50,40 @@ export default class Settings extends React.Component {
   }
 }
 
+Settings.propTypes = {
+  visibility: PropTypes.bool.isRequired,
+};
+
 const styles = StyleSheet.create({
-  narb: {
+  content: {
+    flex: 0,
+    flexDirection: 'row',
     width: '80%',
     height: '60%',
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     borderColor: '#ccc',
     borderWidth: 1,
     borderStyle: 'solid',
-    elevation: 20,
-    padding: 10,
-    // marginTop: '20%',
     marginLeft: 20,
     marginRight: 20,
     borderRadius: 4,
   },
-  blarb: {
+  text: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  spacer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 30,
+    marginTop: 10,
+  },
+  container: {
     width: '100%',
     height: '100%',
-    // borderColor: '#ccc',
-    // borderWidth: 1,
-    // borderStyle: 'solid',
     backgroundColor: 'rgba(0,0,0,0.5)',
-    // elevation: 20,
-    // padding: 10,
-    // marginTop: 100,
-    // marginLeft: 20,
-    // marginRight: 20,
-    // borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
