@@ -19,6 +19,7 @@
 //
 
 import axios from 'axios';
+import { hideSettings, showSettings } from '../actions';
 import { API } from '../constants';
 
 const axi = axios.create({
@@ -37,6 +38,13 @@ const axi = axios.create({
 //   }
 //   return `Bearer ${token}`;
 // };
+export const foo = () => dispatch => {
+  dispatch(showSettings());
+};
+
+export const bar = () => dispatch => {
+  dispatch(hideSettings());
+};
 
 export const test = () => {
   console.log('0******************', API.MSMS_ORG_GROUPS());

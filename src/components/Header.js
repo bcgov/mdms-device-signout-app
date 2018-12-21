@@ -1,17 +1,24 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { StatusBar, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { foo } from '../actionCreators';
+import Settings from './Settings';
 
 const defaultColor = '#036';
 
-export default class Header extends React.Component {
+export class Header extends React.Component {
   _blarb() {
-    console.log('dfkdkfjkdjfkdf');
+    console.log(this.props);
+    // this.props.blarb();
   }
 
   render() {
     return (
       <View style={styles.container}>
+        {console.log('Header', this.props)}
+        <Settings />
         <StatusBar backgroundColor="#036" barStyle="light-content" />
         <View style={styles.spacer} />
         <View style={styles.spacer}>
@@ -19,7 +26,7 @@ export default class Header extends React.Component {
         </View>
         <TouchableHighlight
           onPress={() => {
-            this._blarb();
+            this.props.foo();
           }}
           style={styles.spacer}
           underlayColor={defaultColor}
@@ -59,3 +66,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ foo }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

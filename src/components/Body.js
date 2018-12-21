@@ -1,7 +1,6 @@
 import React from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { test } from '../actionCreators';
-import Settings from './Settings';
 
 export default class Body extends React.Component {
   onPressLearnMore = () => {
@@ -12,7 +11,6 @@ export default class Body extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Settings visibility={true} />
         <TouchableOpacity style={styles.b} onPress={this.onPressLearnMore} underlayColor="#fff">
           <Text style={styles.t}>Update</Text>
         </TouchableOpacity>

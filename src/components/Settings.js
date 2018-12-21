@@ -1,25 +1,20 @@
 import { AntDesign } from '@expo/vector-icons';
-import { create, Store } from 'microstates';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Modal, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { bar } from '../actionCreators';
 
-export default class Settings extends React.Component {
-  updateVisibility = modalVisible => this.setState({ modalVisible });
-
-  state = {
-    modalVisible: Store(create(Boolean, this.props.visibility), this.updateVisibility),
-  };
-
+export class Settings extends React.Component {
   render() {
-    const { modalVisible } = this.state;
-
     return (
       <View>
+        {console.log('Settings', this.props)}
         <Modal
           animationType="fade"
           transparent={true}
-          visible={modalVisible.state}
+          visible={this.props.settings.isVisible}
           // onRequestClose={() => {
           //   Alert.alert('Modal has been closed.');
           // }}
@@ -31,7 +26,7 @@ export default class Settings extends React.Component {
                 <Text style={styles.text}>Settings</Text>
               </View>
               <TouchableHighlight
-                onPress={() => modalVisible.toggle()}
+                onPress={() => this.props.bar()}
                 style={styles.spacer}
                 underlayColor="white"
               >
@@ -51,7 +46,7 @@ export default class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-  visibility: PropTypes.bool.isRequired,
+  settings: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -88,3 +83,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+function mapStateToProps(state) {
+  return {
+    settings: state.settings,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ bar }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Settings);
