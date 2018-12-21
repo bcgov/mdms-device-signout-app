@@ -1,7 +1,6 @@
 //
-// Code Signing
 //
-// Copyright © 2018 Province of British Columbia
+// Copyright © 2018 Province of British Columbia
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,15 +14,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Jason Leach on 2018-09-17.
+// Created by Jason Leach on 2018-12-20.
 //
 
-export const API = {
-  BASE_URL: () => 'http://10.0.1.2:8089/api/v1/',
-  MSMS_ORG_GROUPS: () => 'mdms',
+import { SETTINGS_VISIBILITY } from '../constants';
+
+export const showSettings = () => {
+  return {
+    type: SETTINGS_VISIBILITY.SHOULD_SHOW,
+  };
 };
 
-export const SETTINGS_VISIBILITY = {
-  SHOULD_SHOW: 'SHOULD_SHOW',
-  SHOULD_HIDE: 'SHOULD_HIDE',
+export const hideSettings = () => {
+  return {
+    type: SETTINGS_VISIBILITY.SHOULD_HIDE,
+  };
 };

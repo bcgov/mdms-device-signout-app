@@ -1,7 +1,7 @@
 //
-// Code Signing
+// DevHub
 //
-// Copyright © 2018 Province of British Columbia
+// Copyright © 2018 Province of British Columbia
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,15 +15,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Jason Leach on 2018-09-17.
+// Created by Jason Leach on 2018-08-24.
 //
 
-export const API = {
-  BASE_URL: () => 'http://10.0.1.2:8089/api/v1/',
-  MSMS_ORG_GROUPS: () => 'mdms',
+import { combineReducers } from 'redux';
+import { SETTINGS_VISIBILITY } from '../constants';
+
+const settings = (state = { isVisible: false }, action) => {
+  switch (action.type) {
+    case SETTINGS_VISIBILITY.SHOULD_HIDE:
+      return { isVisible: false };
+    case SETTINGS_VISIBILITY.SHOULD_SHOW:
+      return { isVisible: true };
+    default:
+      return state;
+  }
 };
 
-export const SETTINGS_VISIBILITY = {
-  SHOULD_SHOW: 'SHOULD_SHOW',
-  SHOULD_HIDE: 'SHOULD_HIDE',
-};
+const rootReducer = combineReducers({ settings });
+
+export default rootReducer;
